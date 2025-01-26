@@ -1,0 +1,16 @@
+# Ignore all files ending with .tmp
+
+*.tmp
+
+
+# 4-natours/starter/controllers/old_unrefactured
+old_fractured/
+# Ignore a specific file named "config.local"
+
+config.env
+
+
+
+# Ignore a folder called "build"
+
+build/
