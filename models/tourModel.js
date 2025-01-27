@@ -18,11 +18,11 @@ const tourSchema = new mongoose.Schema({
     type: String,
     required: [true, 'A tour must have a difficulty'],
   },
-  ratingAverage: {
+  ratingsAverage: {
     type: Number,
     default: 4.5,
   },
-  ratingQuantity: {
+  ratingsQuantity: {
     type: Number,
     default: 0,
   },
@@ -45,7 +45,7 @@ const tourSchema = new mongoose.Schema({
     required: [true, 'A tour must have a cover image'],
   },
   images: [String],
-  createAt: {
+  createdAt: {
     type: Date,
     default: Date.now(),
     select: false,
