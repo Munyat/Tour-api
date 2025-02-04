@@ -14,10 +14,12 @@
   "dependencies": {
     "@puppeteer/browsers": "^2.7.0",
     "@xterm/xterm": "^5.5.0",
+    "bcryptjs": "^2.4.3",
     "chromium-bidi": "^1.2.0",
     "dotenv": "^16.4.7",
     "express": "^4.21.1",
     "glob": "^11.0.1",
+    "jsonwebtoken": "^9.0.2",
     "lru-cache": "^11.0.2",
     "mongoose": "^5.13.23",
     "morgan": "^1.10.0",
