@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please enter your Email'],
     unique: true,
-    lowerCase: true,
+    lowercase: true,
     validate: [validator.isEmail, 'Please provide  a  valid email'],
   },
   photo: String,
@@ -29,13 +29,17 @@ const userSchema = new mongoose.Schema({
       validator: function (el) {
         return el === this.password;
       },
+      message: 'Passwords do not match',
     },
   },
+  passwordChangedAt: Date,
 });
 
 userSchema.pre('save', async function (next) {
   //only run this function if password was  actually modified
   if (!this.isModified('password')) return next();
+
+  this.passwordChangedAt = Date.now() - 1000;
 
   //Hash the password with cost of 12
   this.password = await bcrypt.hash(this.password, 12);
@@ -51,6 +55,18 @@ userSchema.methods.correctPassword = async function (
   userPassword,
 ) {
   return await bcrypt.compare(candidatePassword, userPassword);
+};
+
+userSchema.methods.changePasswordAfter = function (JWTTimestamp) {
+  if (this.passwordChangedAt) {
+    const changedTimestamp = parseInt(
+      this.passwordChangedAt.getTime() / 1000,
+      10,
+    );
+
+    return JWTTimestamp < changedTimestamp;
+  }
+  return false;
 };
 
 const User = mongoose.model('User', userSchema);
