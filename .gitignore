@@ -7,7 +7,7 @@
 old_fractured/
 # Ignore a specific file named "config.local"
 
-config.env
+/config.env
 
 
 
